@@ -6,4 +6,13 @@
 
 {% block content %}
     {{distance}}
+
+    <hr>
+
+    <form class="" action="" method="post" autocomplete="off">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" name="button" class="btn btn-primary">Confirm</button>
+
+    </form>
 {% endblock content %}
