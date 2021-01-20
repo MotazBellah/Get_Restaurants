@@ -14,6 +14,7 @@ def calculate_distance_view(request):
     geolocator = Nominatim(user_agent="resturants")
 
     map_osm = folium.Map(width=800, height=500, location=[45.5236, -122.6750])
+    folium.Marker([45.5236, -122.6750], tooltip="Click here for more", popup="TEST", icon=folium.Icon(color='purple')).add_to(map_osm)
 
     if form.is_valid():
         instance = form.save(commit=False)
@@ -41,6 +42,11 @@ def calculate_distance_view(request):
         distance = round(geodesic(pointA, pointB).km, 2)
         print('BBBBBBBBBBBBBB')
         print(distance)
+
+        map_osm = folium.Map(width=1000, height=800, location=[l_lat, l_lon], zoom_start=10)
+        folium.Marker([l_lat, l_lon], tooltip="Click here for more", popup=location_, icon=folium.Icon(color='purple')).add_to(map_osm)
+        folium.Marker([d_lat, d_lon], tooltip="Click here for more", popup=destination_, icon=folium.Icon(color='red', icon='cloud')).add_to(map_osm)
+
         instance.destination = destination_
         instance.location = location_
         instance.distance = distance
