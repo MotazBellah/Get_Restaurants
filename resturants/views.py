@@ -4,6 +4,7 @@ from .forms import MeasurementModelForm
 from django.http import HttpResponse
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
+import folium
 
 # Create your views here.
 def calculate_distance_view(request):
@@ -11,6 +12,8 @@ def calculate_distance_view(request):
     form = MeasurementModelForm(request.POST or None)
 
     geolocator = Nominatim(user_agent="resturants")
+
+    map_osm = folium.Map(width=800, height=500, location=[45.5236, -122.6750])
 
     if form.is_valid():
         instance = form.save(commit=False)
@@ -43,9 +46,13 @@ def calculate_distance_view(request):
         instance.distance = distance
         instance.save()
 
+        # map_osm = folium.Map(width=800, height=500,location=pointA)
+    map_osm = map_osm._repr_html_()
+
     context = {
         'distance': obj,
         'form': form,
+        'map': map_osm,
     }
 
     return render(request, 'measurements/main.html', context)
