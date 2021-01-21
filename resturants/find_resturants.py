@@ -21,7 +21,9 @@ latitude, longitude = 30.0443879, 31.2357257
     #
 	# #2.  Use foursquare API to find a nearby restaurant with the latitude, longitude, and mealType strings.
 	# #HINT: format for url will be something like https://api.foursquare.com/v2/venues/search?client_id=CLIENT_ID&client_secret=CLIENT_SECRET&v=20130815&ll=40.7,-74&query=sushi
-url = ('https://api.foursquare.com/v2/venues/search?client_id=%s&client_secret=%s&v=20182611&ll=%s,%s&query=%s' % (foursquare_client_id, foursquare_client_secret,latitude,longitude,"Falafel"))
+url = ('https://api.foursquare.com/v2/venues/search?client_id=%s&client_secret=%s&v=20182611&ll=%s,%s&query=%s' % (foursquare_client_id, foursquare_client_secret,latitude,longitude,"burgers"))
+
+
 # h = httplib2.Http()
 # print(h)
 # r = h.request(url,'GET')[1]
@@ -34,12 +36,31 @@ url = ('https://api.foursquare.com/v2/venues/search?client_id=%s&client_secret=%
 
 y = requests.get(url)
 result = y.json()
-# print(result)
+print(result)
 
 all = result['response']['venues']
+explore = False
+if not all:
+    url2 = ('https://api.foursquare.com/v2/venues/explore?client_id=%s&client_secret=%s&v=20182611&ll=%s,%s&query=%s' % (foursquare_client_id, foursquare_client_secret,latitude,longitude,"Hamburger"))
+    y = requests.get(url2)
+    result = y.json()
+    print(result['response']['groups'][0]['items'][1]['venue'])
+    explore = True
+
+    all = result['response']['groups'][0]['items']
+    # for i in all:
+    #     venue_id = i['id']
+    #     restaurant_name = i['name']
+    #     restaurant_address = i['location']['formattedAddress']
+    #     location = i['location']
+    #     distance = location['distance']
+
+    print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
 # print(all)
 
 for i in all:
+    if explore:
+        i = i['venue']
     # restaurant = i['response']['venues']
     venue_id = i['id']
     restaurant_name = i['name']
@@ -47,23 +68,51 @@ for i in all:
     location = i['location']
     distance = location['distance']
 
-    url_img = ('https://api.foursquare.com/v2/venues/%s/photos?client_id=%s&v=20150603&client_secret=%s' % ((venue_id,foursquare_client_id,foursquare_client_secret)))
-    z = requests.get(url)
-    v = z.json()
-    # firstpic = v['response']
-
+    # url_img = ('https://api.foursquare.com/v2/venues/%s/photos?client_id=%s&v=20150603&client_secret=%s' % ((venue_id,foursquare_client_id,foursquare_client_secret)))
+    # z = requests.get(url_img)
+    # v = z.json()
+    # print(v)
+    # imageURL = ''
     # if v['response']['photos']['items']:
-	# firstpic = v['response']['photos']['items'][0]
-	# prefix = firstpic['prefix']
+    #     first = v['response']['photos']['items'][0]
+    #     pre = first['prefix']
+    #     suff = first['suffix']
+    #     imageURL = pre + "300x300" + suff
+
+
+    url_like = ('https://api.foursquare.com/v2/venues/%s/likes?client_id=%s&v=20150603&client_secret=%s' % ((venue_id,foursquare_client_id,foursquare_client_secret)))
+    likes = requests.get(url_like)
+    likes_json = likes.json()
+    # print(likes_json)
+    no_of_liks = likes_json['response']['likes']['count']
+    print('//////////////////')
+    print(no_of_liks)
+
+    url_menu = ('https://api.foursquare.com/v2/venues/%s/menu?client_id=%s&v=20150603&client_secret=%s' % ((venue_id,foursquare_client_id,foursquare_client_secret)))
+    menu = requests.get(url_menu)
+    menu_json = menu.json()
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    print(menu_json)
+
+
+    # firstpic = v['response']
+    # prefix = firstpic['prefix']
     # suffix = firstpic['suffix']
     # imageURL = prefix + "300x300" + suffix
+
+    # if v['response']['photos']['items']:
+    # 	firstpic = v['response']['photos']['items'][0]
+    # 	prefix = firstpic['prefix']
+    #     suffix = firstpic['suffix']
+    #     imageURL = prefix + "300x300" + suffix
     print('<<<<<<<<>>>>>>>>')
-    # print(firstpic)
+    # print(first)
     print(venue_id)
     print(restaurant_name)
     print(restaurant_address)
     print(location)
     print(distance)
+    # print(imageURL)
 
 
     #
