@@ -1,19 +1,12 @@
-# from geocode import getGeocodeLocation
 import json
 import httplib2
-
 import requests
-
-
-
 import sys
 import codecs
-# sys.setdefaultencoding('utf-8')
-
-
 
 foursquare_client_id = "GPNIKHBZJTOV43AVINUWDROR124MWFEOI1DI4BPJZH20IXGF"
 foursquare_client_secret = "MHDO5POADIQTWC5G332RN2HLMCHE10HOGTS0RXNVFHX12NTD"
+
 def findAResturant(mealType, location=0):
     latitude, longitude = 30.0443879, 31.2357257
     restaurantInfo = []
@@ -22,7 +15,6 @@ def findAResturant(mealType, location=0):
 
     y = requests.get(url)
     result = y.json()
-
 
     all = result['response']['venues']
     explore = False
@@ -77,4 +69,4 @@ def findAResturant(mealType, location=0):
 
     return restaurantInfo
 
-print(findAResturant("Falafel"))
+# print(findAResturant("Falafel"))

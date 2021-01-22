@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Measurement
 from .forms import MeasurementModelForm
+from .find_resturants import findAResturant
 from django.http import HttpResponse
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
@@ -18,7 +19,7 @@ def calculate_distance_view(request):
 
     if form.is_valid():
         instance = form.save(commit=False)
-        destination_ = form.cleaned_data.get('destination')
+        destination_ = form.cleaned_data.get('meal')
         destination = geolocator.geocode(destination_)
         print(destination.address)
         d_lat = destination.latitude
@@ -37,6 +38,8 @@ def calculate_distance_view(request):
             l_lat = i.latitude
             l_lon = i.longitude
         pointB= (l_lat, l_lon)
+
+
         # l_lat = location.latitude
         # l_lon = location.longitude
         distance = round(geodesic(pointA, pointB).km, 2)
