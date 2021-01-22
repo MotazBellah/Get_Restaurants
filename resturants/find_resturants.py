@@ -7,8 +7,10 @@ import codecs
 foursquare_client_id = "GPNIKHBZJTOV43AVINUWDROR124MWFEOI1DI4BPJZH20IXGF"
 foursquare_client_secret = "MHDO5POADIQTWC5G332RN2HLMCHE10HOGTS0RXNVFHX12NTD"
 
-def findAResturant(mealType, location=0):
-    latitude, longitude = 30.0443879, 31.2357257
+def findAResturant(mealType, location):
+    # latitude, longitude = 30.0443879, 31.2357257
+
+    latitude, longitude = location
     restaurantInfo = []
 
     url = ('https://api.foursquare.com/v2/venues/search?client_id=%s&client_secret=%s&v=20182611&ll=%s,%s&query=%s' % (foursquare_client_id, foursquare_client_secret,latitude,longitude,mealType))
