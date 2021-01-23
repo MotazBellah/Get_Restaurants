@@ -16,4 +16,14 @@
     <br>
     {{ map|safe }}
 
+    {% if resturants %}
+        {% for resturant in resturants %}
+            <li>
+                <p><strong>{{resturant.name}}</strong></p>
+                <span>{{resturant.address}}</span><br>
+                <span>{{resturant.distance}}</span>
+            </li>
+        {% endfor %}
+    {% endif %}
+
 {% endblock content %}

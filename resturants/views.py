@@ -13,6 +13,7 @@ def calculate_distance_view(request):
     form = MeasurementModelForm(request.POST or None)
 
     geolocator = Nominatim(user_agent="resturants")
+    resturants_list = []
 
     map_osm = folium.Map(width=800, height=500, location=[45.5236, -122.6750])
     folium.Marker([45.5236, -122.6750], tooltip="Click here for more", popup="TEST", icon=folium.Icon(color='purple')).add_to(map_osm)
@@ -49,6 +50,7 @@ def calculate_distance_view(request):
         'distance': obj,
         'form': form,
         'map': map_osm,
+        'resturants': resturants_list,
     }
 
     return render(request, 'measurements/main.html', context)
