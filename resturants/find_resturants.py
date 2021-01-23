@@ -76,7 +76,7 @@ def findAResturant(mealType, location):
         # print(menu_json)
 
         restaurantDict = {'name': restaurant_name, 'address': "".join(restaurant_address).strip(),
-                          'img': url_img, 'distance': distance, 'lat_lng': lat_lng,
+                          'img': url_img, 'distance': distance/1000, 'lat_lng': lat_lng,
                           'likes': no_of_liks}
 
         restaurantInfo.append(restaurantDict)

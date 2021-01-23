@@ -9,6 +9,35 @@
 
     <title>Geo django | {% block title %}{% endblock title %}</title>
   </head>
+  <style media="screen">
+      .grid-list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media only screen and (max-width: 900px) {
+          .grid-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media only screen and (max-width: 780px) {
+          .grid-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media only screen and (max-width: 510px) {
+          .grid-list {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            }
+        }
+        .name {
+            color: black
+        }
+  </style>
   <body>
     <div class="container">
         {% block content %}

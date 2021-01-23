@@ -17,13 +17,18 @@
     {{ map|safe }}
 
     {% if resturants %}
-        {% for resturant in resturants %}
-            <li>
-                <p><strong>{{resturant.name}}</strong></p>
-                <span>{{resturant.address}}</span><br>
-                <span>{{resturant.distance}}</span>
-            </li>
-        {% endfor %}
+        <ul class="grid-list">
+            {% for resturant in resturants %}
+                <li>
+                    <a href="https://www.google.com/search?q={{resturant.name}}+{{location}}"
+                       target="_blank">
+                        <span class="name"><strong>{{resturant.name}}</strong></span><br>
+                        <span class="text-secondary">{{resturant.address}}</span><br>
+                        <span class="text-secondary">{{resturant.distance}} Km.</span><br>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
     {% endif %}
 
 {% endblock content %}

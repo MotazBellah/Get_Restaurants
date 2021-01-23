@@ -14,6 +14,7 @@ def calculate_distance_view(request):
 
     geolocator = Nominatim(user_agent="resturants")
     resturants_list = []
+    location_ = ''
 
     map_osm = folium.Map(width=800, height=500, location=[45.5236, -122.6750])
     folium.Marker([45.5236, -122.6750], tooltip="Click here for more", popup="TEST", icon=folium.Icon(color='purple')).add_to(map_osm)
@@ -38,12 +39,12 @@ def calculate_distance_view(request):
         resturants_list = findAResturant(meal, point)
         print(resturants_list)
 
-        map_osm = folium.Map(width=400, height=500, location=[l_lat, l_lon])
+        map_osm = folium.Map(width='100%', height=550, location=[l_lat, l_lon], zoom_start=13)
         folium.Marker([l_lat, l_lon], tooltip="Click here for more", popup=location_, icon=folium.Icon(color='purple')).add_to(map_osm)
         for i in resturants_list:
-            folium.Marker([i['lat_lng'][0], i['lat_lng'][1]], tooltip="Click here for more", popup=i['name'], icon=folium.Icon(color='red', icon='cloud')).add_to(map_osm)
+            popup_action = "<strong>" + i['name'] + "</strong><br>"
+            folium.Marker([i['lat_lng'][0], i['lat_lng'][1]], tooltip="Click here for more", popup=popup_action, icon=folium.Icon(color='blue', icon='cloud')).add_to(map_osm)
 
-        # map_osm = folium.Map(width=800, height=500,location=pointA)
     map_osm = map_osm._repr_html_()
 
     context = {
@@ -51,6 +52,7 @@ def calculate_distance_view(request):
         'form': form,
         'map': map_osm,
         'resturants': resturants_list,
+        'location': location_,
     }
 
     return render(request, 'measurements/main.html', context)
