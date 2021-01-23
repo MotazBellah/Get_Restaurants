@@ -51,54 +51,13 @@ def findAResturant(mealType, location):
         distance = location['distance']
         lat_lng = location['lat'], location['lng']
 
-        url_img = ('https://api.foursquare.com/v2/venues/%s/photos?client_id=%s&v=20150603&client_secret=%s' % ((venue_id,foursquare_client_id,foursquare_client_secret)))
-        # z = requests.get(url_img)
-        # v = z.json()
-        # imageURL = ''
-        # if 'photos' in v['response']:
-        #     if v['response']['photos']['items']:
-        #         first = v['response']['photos']['items'][0]
-        #         pre = first['prefix']
-        #         suff = first['suffix']
-        #         imageURL = pre + "300x300" + suff
-
-
-        # url_like = ('https://api.foursquare.com/v2/venues/%s/likes?client_id=%s&v=20150603&client_secret=%s' % ((venue_id,foursquare_client_id,foursquare_client_secret)))
-        # likes = requests.get(url_like)
-        # likes_json = likes.json()
-        # no_of_liks = likes_json['response']['likes']['count']
-        no_of_liks = 0
-
-        # url_menu = ('https://api.foursquare.com/v2/venues/%s/menu?client_id=%s&v=20150603&client_secret=%s' % ((venue_id,foursquare_client_id,foursquare_client_secret)))
-        # menu = requests.get(url_menu)
-        # menu_json = menu.json()
-        # print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-        # print(menu_json)
-
         restaurantDict = {'name': restaurant_name, 'address': "".join(restaurant_address).strip(),
-                          'img': url_img, 'distance': distance/1000, 'lat_lng': lat_lng,
-                          'likes': no_of_liks}
+                          'distance': distance/1000, 'lat_lng': lat_lng}
 
         restaurantInfo.append(restaurantDict)
 
     return restaurantInfo
 
-# def get_photo(mealType, location=(30.0443879, 31.2357257)):
-#     resturants_info = findAResturant(mealType, location)
-#     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5)\
-#             AppleWebKit/537.36 (KHTML, like Gecko) Cafari/537.36'}
-#
-#     for i in resturants_info:
-#         z = requests.get(i['img'])
-#         v = z.json()
-#         print(v)
-
-    # with FuturesSession(max_workers=1) as session:
-    #     futures = [session.get(i['img']) for i in resturants_info]
-    #     print(futures)
-    #     for future in futures:
-    #         response = future.result()
-    #         print(response)
 
 # def find_photos(keyward):
 #     # yelp_api = YelpAPI(yelp_api_key)
