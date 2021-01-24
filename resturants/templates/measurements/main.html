@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-    Calculate distance
+    Find Places
 {% endblock title %}
 
 {% block content %}
@@ -14,7 +14,9 @@
 
     </form>
     <br>
-    {{ map|safe }}
+    {% if map %}
+        {{ map|safe }}
+    {% endif %}
 
     {% if resturants %}
         <ul class="grid-list">

@@ -16,8 +16,9 @@ def calculate_distance_view(request):
     resturants_list = []
     location_ = ''
 
-    map_osm = folium.Map(width=800, height=500, location=[45.5236, -122.6750])
-    folium.Marker([45.5236, -122.6750], tooltip="Click here for more", popup="TEST", icon=folium.Icon(color='purple')).add_to(map_osm)
+    map_osm = ''
+    # map_osm = folium.Map(width=800, height=500, location=[45.5236, -122.6750])
+    # folium.Marker([45.5236, -122.6750], tooltip="Click here for more", popup="TEST", icon=folium.Icon(color='purple')).add_to(map_osm)
 
     if form.is_valid():
         # instance = form.save(commit=False)
