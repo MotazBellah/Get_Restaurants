@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Measurement
 from .forms import MeasurementModelForm
 from .find_resturants import findAResturant
 from django.http import HttpResponse

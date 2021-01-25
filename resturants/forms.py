@@ -1,5 +1,5 @@
 from django import forms
-from .models import Measurement
+
 
 class MeasurementModelForm(forms.Form):
     location = forms.CharField()
