@@ -10,12 +10,12 @@ import folium
 def calculate_distance_view(request):
 
     geolocator = Nominatim(user_agent="resturants")
+    form = MeasurementModelForm(request.POST or None)
     resturants_list = []
     location_ = ''
 
     map_osm = ''
     if request.method == "POST":
-        form = MeasurementModelForm(request.POST)
         if form.is_valid():
             # form.save()
             meal = form.cleaned_data.get('meal')
