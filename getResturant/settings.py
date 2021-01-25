@@ -25,7 +25,7 @@ SECRET_KEY = 'ik!$5sxl_1)--(c0ywmmh*5*f*@111=7n+mhg@73b0e&h1(xkh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['get-restaurants.herokuapp.com', 'localhost']
 
 
 # Application definition
