@@ -2,21 +2,19 @@ import json
 import httplib2
 import requests
 import sys
-import codecs
-from requests_futures.sessions import FuturesSession
 
-from flickrapi import FlickrAPI
-from yelpapi import YelpAPI
+# from flickrapi import FlickrAPI
+# from yelpapi import YelpAPI
 
 foursquare_client_id = "GPNIKHBZJTOV43AVINUWDROR124MWFEOI1DI4BPJZH20IXGF"
 foursquare_client_secret = "MHDO5POADIQTWC5G332RN2HLMCHE10HOGTS0RXNVFHX12NTD"
 
-flicker_api = "fe0ed62e4e7921c6f413d8d237cae744"
-flicker_secret = "83855df34390897b"
+# flicker_api = "fe0ed62e4e7921c6f413d8d237cae744"
+# flicker_secret = "83855df34390897b"
 
-yelp_api_key = "EfGWOgYw0nC303Y6ZT6iLWIAdvVhg6mhutUcIu1vixCJJ1ZyL6EUwbytUmRiDlFmxnlraowD1g5MZN4inZm2q5WqyEuf_2UOTmROhstLehrRT_TO_5rGddpYFhgLYHYx"
+# yelp_api_key = "EfGWOgYw0nC303Y6ZT6iLWIAdvVhg6mhutUcIu1vixCJJ1ZyL6EUwbytUmRiDlFmxnlraowD1g5MZN4inZm2q5WqyEuf_2UOTmROhstLehrRT_TO_5rGddpYFhgLYHYx"
 
-zomato_api = '4b246d4d35c826771d1a3ef4bb06770b'
+# zomato_api = '4b246d4d35c826771d1a3ef4bb06770b'
 
 def findAResturant(mealType, location):
     # latitude, longitude = 30.0443879, 31.2357257
