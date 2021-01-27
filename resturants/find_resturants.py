@@ -17,11 +17,13 @@ foursquare_client_secret = "MHDO5POADIQTWC5G332RN2HLMCHE10HOGTS0RXNVFHX12NTD"
 # zomato_api = '4b246d4d35c826771d1a3ef4bb06770b'
 
 def findAResturant(mealType, location):
-    # latitude, longitude = 30.0443879, 31.2357257
-
+    '''Get list of resturants using foursquare API
+    input: meal type (str), location (tuple of floats)
+    output: List of dict, contain the info about the places/restaurants'''
+    # Unpack the tuple
     latitude, longitude = location
     restaurantInfo = []
-
+    # foursquare API - search
     url = ('https://api.foursquare.com/v2/venues/search?client_id=%s&client_secret=%s&v=20182611&ll=%s,%s&query=%s' % (foursquare_client_id, foursquare_client_secret,latitude,longitude,mealType))
 
     y = requests.get(url)
@@ -29,6 +31,7 @@ def findAResturant(mealType, location):
 
     all = result['response']['venues']
     explore = False
+    # If search url, fetch nothing, then try explore url
     if not all:
         url2 = ('https://api.foursquare.com/v2/venues/explore?client_id=%s&client_secret=%s&v=20182611&ll=%s,%s&query=%s' % (foursquare_client_id, foursquare_client_secret,latitude,longitude,mealType))
         y = requests.get(url2)
@@ -36,7 +39,7 @@ def findAResturant(mealType, location):
         explore = True
 
         all = result['response']['groups'][0]['items']
-
+    # Parse the reponse, and get the id, name, address, distance and lat_lng
     for i in all:
 
         if explore:
@@ -56,12 +59,14 @@ def findAResturant(mealType, location):
 
     return restaurantInfo
 
-
+# Yelp api, but it's not worldwide, so i stick with foursquare
+# And flicker for images not so accurate
 # def find_photos(keyward):
 #     # yelp_api = YelpAPI(yelp_api_key)
 #     # latitude, longitude = 30.0443879, 31.2357257
 #     # search_results = yelp_api.search_query(term='burger', latitude=30.0443879, longitude=31.2357257, sort_by='rating', limit=5)
 #     # print(search_results)
+
 #     flickr = FlickrAPI(flicker_api,flicker_secret,cache=True)
 #
 #     photos = flickr.walk(text=keyward,
@@ -79,9 +84,3 @@ def findAResturant(mealType, location):
 #
 #         except Exception as e:
 #             print('failed to download image')
-#
-#
-#
-#
-#
-# print(get_photo('Burger'))
